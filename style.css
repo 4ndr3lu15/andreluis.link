@@ -1,0 +1,68 @@
+/* andreluis.link: GNOME (libadwaita) colors, a header bar and boxed lists. Follows light or dark. */
+:root {
+  --window: #fafafb; --headerbar: #ffffff; --card: #ffffff;
+  --fg: rgb(0 0 6 / .8); --dim: rgb(0 0 6 / .55); --border: rgb(0 0 6 / .07);
+  --accent: #1c71d8;
+  --card-shadow: 0 0 0 1px rgb(0 0 6 / .03), 0 1px 3px 1px rgb(0 0 6 / .07), 0 2px 6px 2px rgb(0 0 6 / .03);
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --window: #222226; --headerbar: #2e2e32; --card: rgb(255 255 255 / .08);
+    --fg: #ffffff; --dim: rgb(255 255 255 / .55); --border: rgb(0 0 6 / .36);
+    --accent: #78aeed;
+    --card-shadow: 0 0 0 1px rgb(0 0 6 / .09), 0 1px 3px 1px rgb(0 0 6 / .1);
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+  background: var(--window); color: var(--fg);
+  font: 16px/1.6 "Adwaita Sans", Inter, Cantarell, system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+}
+.clamp { width: 100%; max-width: 40rem; margin: 0 auto; padding: 0 16px; }
+
+.headerbar {
+  background: var(--headerbar); border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgb(0 0 6 / .04);
+}
+.headerbar .clamp { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 47px; }
+.headerbar .title { font-weight: 700; color: var(--fg); text-decoration: none; }
+.headerbar nav { display: flex; gap: 6px; }
+.headerbar nav a {
+  color: var(--fg); text-decoration: none; font-size: 15px; font-weight: 500;
+  padding: 4px 10px; border-radius: 6px;
+}
+.headerbar nav a:hover { background: rgb(127 127 127 / .12); }
+.headerbar nav a[aria-current] { background: rgb(127 127 127 / .18); }
+.headerbar .languages { display: flex; gap: 2px; margin-left: 6px; padding-left: 8px; border-left: 1px solid var(--border); }
+.headerbar .languages a { font-size: 13px; font-weight: 600; padding: 4px 8px; color: var(--dim); }
+.headerbar .languages a[aria-current] { color: var(--fg); }
+
+main.clamp { flex: 1; padding-top: 48px; padding-bottom: 48px; }
+.pages h1:only-of-type + .boxed-list { margin-top: 24px; }
+h1 { font-size: 2rem; font-weight: 800; line-height: 1.2; margin: 0 0 4px; letter-spacing: -.01em; }
+h1 small { display: block; font-size: 1.05rem; font-weight: 400; color: var(--dim); margin-top: 6px; letter-spacing: 0; }
+h2 { font-size: 15px; font-weight: 700; margin: 36px 0 10px; }
+p { margin: 1em 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+
+/* AdwPreferencesGroup + boxed list */
+.boxed-list {
+  list-style: none; margin: 0; padding: 0;
+  background: var(--card); border-radius: 12px; box-shadow: var(--card-shadow); overflow: hidden;
+}
+.boxed-list li { display: flex; align-items: center; gap: 12px; min-height: 58px; padding: 9px 14px; }
+.boxed-list li + li { border-top: 1px solid var(--border); }
+.boxed-list .row-text { flex: 1; min-width: 0; }
+.boxed-list .row-title { display: block; font-weight: 500; }
+.boxed-list .row-subtitle { display: block; font-size: 14px; color: var(--dim); }
+.boxed-list .suffix { color: var(--dim); font-size: 14px; flex: none; margin-left: auto; }
+.boxed-list a.row { color: inherit; text-decoration: none; display: flex; align-items: center; gap: 12px;
+  margin: -9px -14px; padding: 9px 14px; flex: 1; min-height: 52px; }
+.boxed-list a.row:hover { background: rgb(127 127 127 / .07); }
+.boxed-list a.row::after { content: "›"; color: var(--dim); font-size: 20px; }
+
+.foot.clamp { padding-bottom: 24px; color: var(--dim); font-size: 13px; text-align: center; }
